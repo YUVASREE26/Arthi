@@ -1,155 +1,156 @@
-Heyyy 😄 okay this is basically a **full DevOps mini-lab question** (Git + Maven + Jenkins). I’ll give you **super clear, baby-step explanation + what to write in your answer file**.
+Heyyy 😄 perfect — now you’ve specified the **scenario + Java only**, so I’ll give you a **clean, ready-to-upload answer file** (exactly what your faculty expects 💯).
+
+I’ll use 👉 **Loan Eligibility Checker** (easy logic + professional).
 
 ---
 
-# ✅ **Answer – Question Set 1**
+# ✅ **QUESTION SET 1 – ANSWER**
 
-## 🔹 1. Create Maven-based application & push to GitHub
+## 🔹 **Scenario Chosen: Loan Eligibility Checker**
 
-### 📌 Step 1: Create Maven Project (in VS Code)
+The application checks loan eligibility based on:
 
-1. Open VS Code
-
-2. Install extensions:
-
-   * Java Extension Pack
-   * Maven for Java
-
-3. Press `Ctrl + Shift + P` → type:
-   👉 `Maven: Create Maven Project`
-
-4. Choose:
-
-   * Archetype → `maven-archetype-quickstart`
-   * Group Id → `com.example`
-   * Artifact Id → `demo-app`
+* Salary
+* Age
+* Credit Score
 
 ---
 
-### 📌 Step 2: Standard Maven Directory Structure
+## 🔹 **1. Maven-Based Application Creation**
 
-Your project should look like this:
+### 📌 Steps:
+
+* Open VS Code
+* Use `Maven: Create Maven Project`
+* Select archetype → `maven-archetype-quickstart`
+* Group ID → `com.example`
+* Artifact ID → `loan-app`
+
+---
+
+### 📌 Standard Maven Directory Structure
 
 ```
-demo-app/
+loan-app/
 │── src/
 │   ├── main/
-│   │   └── java/
-│   │       └── com/example/App.java
+│   │   └── java/com/example/App.java
 │   ├── test/
-│       └── java/
-│           └── com/example/AppTest.java
+│       └── java/com/example/AppTest.java
 │── pom.xml
 ```
 
-👉 This is **VERY IMPORTANT** (exam keyword: *standard maven directory structure*)
+👉 *pom.xml is used to manage dependencies and build configuration*
 
 ---
 
-### 📌 Step 3: Create GitHub Repository
-
-1. Go to GitHub
-2. Click **New Repository**
-3. Name: `maven-demo-app`
-4. Click **Create**
-
----
-
-### 📌 Step 4: Push Project to GitHub
-
-In VS Code terminal:
-
-```bash
-git init
-git add .
-git commit -m "Initial Maven project"
-git branch -M main
-git remote add origin https://github.com/your-username/maven-demo-app.git
-git push -u origin main
-```
-
----
-
-## 🔹 2. Clone repo, modify program, commit changes
-
-### 📌 Step 1: Clone Repository
-
-```bash
-git clone https://github.com/your-username/maven-demo-app.git
-cd maven-demo-app
-```
-
----
-
-### 📌 Step 2: Modify Program
-
-Open `App.java` and change:
+## 🔹 **2. Java Program – Loan Eligibility Checker**
 
 ```java
+package com.example;
+
+import java.util.Scanner;
+
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello CI/CD World!");
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Salary: ");
+        double salary = sc.nextDouble();
+
+        System.out.print("Enter Age: ");
+        int age = sc.nextInt();
+
+        System.out.print("Enter Credit Score: ");
+        int creditScore = sc.nextInt();
+
+        if (salary >= 30000 && age >= 21 && age <= 60 && creditScore >= 700) {
+            System.out.println("Loan Approved");
+        } else {
+            System.out.println("Loan Rejected");
+        }
+
+        sc.close();
     }
 }
 ```
 
 ---
 
-### 📌 Step 3: Commit Changes
+## 🔹 **3. Create GitHub Repository & Push Code**
+
+### 📌 Steps:
+
+1. Create repository → `loan-app`
+
+2. Run commands in VS Code terminal:
+
+```bash
+git init
+git add .
+git commit -m "Initial commit - Loan eligibility app"
+git branch -M main
+git remote add origin https://github.com/your-username/loan-app.git
+git push -u origin main
+```
+
+---
+
+## 🔹 **4. Clone, Modify & Commit**
+
+### 📌 Clone Repository
+
+```bash
+git clone https://github.com/your-username/loan-app.git
+cd loan-app
+```
+
+### 📌 Modify Program
+
+Add line:
+
+```java
+System.out.println("Loan Eligibility Checker");
+```
+
+### 📌 Commit Changes
 
 ```bash
 git add .
-git commit -m "Updated application message"
+git commit -m "Updated program output"
 git push
 ```
 
 ---
 
-## 🔹 3. Build & Validate in VS Code
-
-### 📌 Step 1: Build using Maven
+## 🔹 **5. Build & Validate Application (Maven)**
 
 ```bash
 mvn clean install
 ```
 
-### 📌 Step 2: Run Program
+Run application:
 
 ```bash
 mvn exec:java -Dexec.mainClass="com.example.App"
 ```
 
-👉 If it runs successfully → ✅ Build is valid
-👉 This ensures **Jenkins compatibility**
+👉 *Successful execution confirms compatibility for Jenkins integration*
 
 ---
 
-## 🔹 4. Configure Jenkins Pipeline (CI/CD)
+## 🔹 **6. Jenkins Pipeline Configuration (CI/CD)**
 
-### 📌 Step 1: Open Jenkins
+### 📌 Steps:
 
-Go to:
-
-```
-http://localhost:8080
-```
-
----
-
-### 📌 Step 2: Create Pipeline Project
-
-1. Click **New Item**
-2. Enter name → `Maven-CI-CD`
-3. Select **Pipeline**
-4. Click OK
+* Open Jenkins → `http://localhost:8080`
+* Click **New Item**
+* Select **Pipeline Project**
+* Name → `Loan-CI-CD`
 
 ---
 
-### 📌 Step 3: Configure Pipeline Script
-
-Scroll → Pipeline → choose **Pipeline script**
-
-Paste this:
+### 📌 Pipeline Script
 
 ```groovy
 pipeline {
@@ -158,7 +159,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-username/maven-demo-app.git'
+                git 'https://github.com/your-username/loan-app.git'
             }
         }
 
@@ -183,52 +184,31 @@ pipeline {
 }
 ```
 
-⚠️ If using Linux/Mac:
-Replace `bat` with `sh`
+👉 Use `sh` instead of `bat` for Linux systems
 
 ---
 
-### 📌 Step 4: Build Pipeline
+## 🔹 **7. CI/CD Workflow Execution**
 
-1. Click **Build Now**
-2. Check Console Output
+* Click **Build Now** in Jenkins
+* Verify:
 
-👉 You should see:
-
-* Code cloned ✅
-* Build success ✅
-* Tests run ✅
-
----
-
-# 🧠 What to Say in Viva / Seminar
-
-* Maven ensures **project structure + dependency management**
-* GitHub is used for **version control**
-* Jenkins automates **CI/CD pipeline**
-* Pipeline stages:
-
-  * Clone
-  * Build
-  * Test
-  * Run
-* This workflow ensures **automation + integration + deployment readiness**
+  * Code cloned successfully
+  * Build successful
+  * Tests executed
+  * Application runs
 
 ---
 
-# 📸 Screenshots You Should Take
+## 🔹 **Conclusion**
 
-1. Maven project structure
-2. GitHub repository
-3. Code modification
-4. Git commit
-5. Maven build success
-6. Jenkins pipeline config
-7. Jenkins console output
+This project demonstrates **Continuous Integration and Continuous Deployment (CI/CD)** using Jenkins, where the application is automatically built, tested, and executed whenever changes are made in the GitHub repository.
 
 ---
 
-If you want, I can:
-✅ Convert this into **perfect PDF answer format**
-✅ Give you **short 1-page cheat sheet for exam writing**
-✅ Help with **Question Set 2 also**
+# 🎯 Done — This is PERFECT for submission
+
+If you want:
+✅ I can give **Scholarship version also (just in case)**
+✅ Or convert this into **PDF format you can upload directly**
+✅ Or give **super short 1-page revision before viva**
