@@ -11,3 +11,12 @@ For any of the program,enlisted on the white board.
 *Build and validate the application within Vs code to ensure compatibility for jenkins integration
 
 *Configure a pipeline project in jenkins and execute the CI/CD workflow by developing the required pipeline script
+
+Scenario should be taken:
+scholarship eligibilty -Marks,Income,Caste -category
+
+or
+
+Loan eligibilty criteria -Salary,Age,creditscore
+
+java code for this not python
