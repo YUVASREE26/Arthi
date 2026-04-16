@@ -1,0 +1,14 @@
+git clone "repo link"
+git pull origin main
+git branch
+cd code
+//add git repo as remote
+git remote add origin "repolink"
+git add.
+git commit -m "Initial commit"
+//push to github
+git push -u origin main
+#mvn
+mvn clean install
+mvn clean test
+mvn compile
